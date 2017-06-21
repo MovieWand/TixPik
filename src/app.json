@@ -1,0 +1,14 @@
+{
+    "name": "TixPik",
+    "description": "A website of TixPik service",
+    "keywords": [
+        "movie",
+        "ticket",
+        "deal"
+    ],
+    "resposity": "https://github.com/MovieWand/TixPik.git",
+    "logo":"",
+    "env": {
+        "PRODUCTION": true
+    }
+}
