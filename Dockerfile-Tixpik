@@ -1,0 +1,5 @@
+FROM jetty:latest
+MAINTAINER Kayden <anhtai.le@izeta.co>
+RUN mkdir /var/lib/jetty/moviewand_logs/
+ADD /targets/MovieWand.war /var/lib/jetty/webapps/MovieWand.war
+EXPOSE 8080

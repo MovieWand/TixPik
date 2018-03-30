@@ -1,0 +1,44 @@
+version: '3'
+services:
+  mysql-server:
+    container_name: mysql-server
+    image: mysql
+    volumes:
+      - ${PWD}/startup/create-db.sql:/tmp/create-db.sql
+      - ${PWD}/bin/importdb.sh:/tmp/importdb.sh
+      - ${PWD}/startup/create-db.sql:/tmp/dump.sql
+      - ${PWD}/startup:/docker-entrypoint-initdb.d
+      - ${PWD}/data:/var/lib/mysql    
+    expose:
+      - "3306"
+    ports:
+        - "3306:3306"
+    environment:
+        - MYSQL_ROOT_PASSWORD=tixpik@123456
+  redis-server:
+    container_name: redis-server
+    image: redis
+    expose:
+        - "6739"
+    ports:
+        - "6739:6739"
+    links:
+        - mysql-server:mysql-server
+  tixpik-server:
+    container_name: tixpik-server
+    build:
+      context: .
+      dockerfile: Dockerfile-Tixpik
+    image: tixpik-server:latest    
+    expose: 
+      - "8080"
+    ports:
+      - "9991:8080"
+    links:
+      - redis-server:redis-server
+      - mysql-server:mysql-server
+    depends_on:
+      - mysql-server
+
+
+    
