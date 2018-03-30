@@ -19,7 +19,6 @@ show tables;
 
 load data local infile 'company.csv' into table Company fields terminated by '@' lines terminated by '\n';
 
-test thu
 
 
 
